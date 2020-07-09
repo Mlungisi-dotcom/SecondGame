@@ -30,7 +30,59 @@
 
 	<link rel="stylesheet" href="css/tab.css">
 	
-	<style>
+<style>
+ /* This is my Popup container */
+ .popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* The actual popup (appears on top) */
+.popup .popuptext {
+  visibility: hidden;;
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+} 
 
 #navbar {
   overflow: hidden;
@@ -461,8 +513,57 @@
 	<script src="js/jquery.zoom.min.js"></script>
 	<script src="js/jquery-ui.min.js"></script>
 	<script src="js/main.js"></script>
+	<script src="js/index.js"></script>
 
+	<div class="popup" onclick="myFunction()">Click me!
+		<span class="popuptext" id="myPopup">Popup text...</span>
+	  </div> 
+
+
+<button onclick="myFunction()">Form</button> 
+<hr>
+	<iframe id="myIframe" src="./registration.html"  frameborder="1" width="900px" height="1000">Form</iframe>
 	</body>
+
+<script>
+	const myIframe = document.getElementById("myIframe")
+	function changeColor() {
+
+		const iframeWindow = myIframe.registationWindow;
+		console.log(iframeWindow.document)
+
+
+		iframeDocument.body.style.backgroundColor = "#ff0000"
+
+
+
+		function myFunction() {
+  		var popup = document.getElementById("myPopup");
+  		popup.classList.toggle("show");
+}
+	}
+</script>
+
+<style>
+#myIframe{
+	position: bottom center;
+	padding-left: 20px;
+	padding-right: 50px;
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script>
 function openCity(cityName, elmnt, color) {
   // Hide all elements with class="tabcontent" by default */
