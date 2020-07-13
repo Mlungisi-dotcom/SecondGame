@@ -182,7 +182,7 @@
 			<a href="#history">About Us</a>
 			<a id="event-id"  onclick="func()" href="#schoolProject" >Events</a>
 			<a href="#footerDiv">Contacts</a>
-			<a  href="registration.html"   id="content-title">Registration</a>
+			<a  href="form.html"   id="content-title"><Fieldset>Form</Fieldset></a>
 			<a  href="game.html"   id="content-title">Game</a>
 		</div>
 		
@@ -475,16 +475,10 @@
 
 
 
-<div class="footer" style="z-index: 99;">
-<div style="width: 100%; height: 10px; background-color: midnightblue"></div>
-		<p> Address:Mzamomtsha Primary school | 
-		49 Valangenyawo Street/P.O Box 40034, Elonwabeni,
-					 Cape Town
-				 ,Western Cape Province
-					 ,7791.
-|	Telephone:021 387 4851
-|	Fax number:086 561 5914
-|	E-mail address: mzamomtshaps@gmail.com</p>
+	<div class="footer" style="z-index: 99;">
+		<div style="width: 100%; height: 10px; background-color: midnightblue"></div>
+		<p> Address:Mzamomtsha Primary school | 49 Valangenyawo Street/P.O Box 40034, Elonwabeni,Cape Town,Western Cape Province,7791.Telephone:021 387 4851 Fax number:086 561 5914 E-mail address: mzamomtshaps@gmail.com
+		</p>
 	</div>
 	
 	
@@ -501,7 +495,7 @@
 				navbar.classList.remove("sticky");
 			}
 		}
-		</script>
+	</script>
 	<!--====== Javascripts & Jquery ======-->
 
 
@@ -515,15 +509,45 @@
 	<script src="js/main.js"></script>
 	<script src="js/index.js"></script>
 
-	<div class="popup" onclick="myFunction()">Click me!
+	<div class="popup" onclick="myFunction()">
 		<span class="popuptext" id="myPopup">Popup text...</span>
-	  </div> 
-
-
-<button onclick="myFunction()">Form</button> 
-<hr>
+	</div> 
+		<hr>
+	<input type="file" onchange="readFile(this)"> 
+		<hr>
 	<iframe id="myIframe" src="./registration.html"  frameborder="1" width="900px" height="1000">Form</iframe>
-	</body>
+</body>
+<script>
+	const input = document.querySelector('input[type="file"]')
+	input.addEventListener('change', function (e) {
+		const reader = new FileReader()
+		reader.onload = function () {
+			const img = new Image()
+			img.onload = function () {
+				const canvas = document.createElement('canvas')
+				const context = canvas.getContext('2d')
+				context.drawImage(img, 0, 0)
+
+				const imageData = context.getImageData(0, 0, canvas.width, canvas.height)
+				const data = imageData.data
+				for (var i = 0; i <= data.length; i += 4) {
+					const avg = (data[i] + data[i + 1] + data[i + 2]) / 3
+					data[i] = avg
+					data[i + 1] = avg
+					data[i + 2] = avg
+				}
+				context.putImageData(imageData, 0, 0)
+
+				document.body.appendChild(canvas)
+			}
+			img.src = reader.result
+			//document.body.appendChild(img)
+		}
+		reader.readAsDataURL(inptu.file[0])
+	}, false)
+</script>
+
+
 
 <script>
 	const myIframe = document.getElementById("myIframe")
@@ -551,18 +575,6 @@
 	padding-right: 50px;
 }
 </style>
-
-
-
-
-
-
-
-
-
-
-
-
 
 <script>
 function openCity(cityName, elmnt, color) {
